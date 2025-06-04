@@ -1,5 +1,6 @@
 /_data
 
 **/logs.log
+**/__pycache__/
 
 Panic-Project-CYS.code-workspace

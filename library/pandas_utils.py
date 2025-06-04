@@ -353,9 +353,8 @@ def aggregate_by_column(df: pd.DataFrame, group_col: str, agg_matrix: list[tuple
         'nunique', 'std', 'var', 'skew', 'kurt', 'unique', 'mode'
     }
 
-    agg_dict = {}
-    rename_dict = {}
-
+    # Use NamedAgg to ensure custom column names are preserved
+    agg_kwargs = {}
     for new_col, orig_col, func in agg_matrix:
         if orig_col not in df.columns:
             raise ValueError(f"Column '{orig_col}' not found in DataFrame for aggregation.")
@@ -372,17 +371,8 @@ def aggregate_by_column(df: pd.DataFrame, group_col: str, agg_matrix: list[tuple
                 f"Must be a string or callable."
             )
 
-        if orig_col not in agg_dict:
-            agg_dict[orig_col] = []
-        agg_dict[orig_col].append(func)
-        rename_dict[(orig_col, func)] = new_col
+        agg_kwargs[new_col] = pd.NamedAgg(column=orig_col, aggfunc=func)
 
-    aggregated_df = df.groupby(group_col).agg(agg_dict).reset_index()
-
-    # Flatten MultiIndex columns and apply user-defined renames
-    aggregated_df.columns = [
-        rename_dict.get((col[0], col[1]), col[0]) if isinstance(col, tuple) else col
-        for col in aggregated_df.columns
-    ]
+    aggregated_df = df.groupby(group_col).agg(**agg_kwargs).reset_index()
 
     return aggregated_df
