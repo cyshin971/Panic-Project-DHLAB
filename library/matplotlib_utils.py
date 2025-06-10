@@ -2,6 +2,7 @@ import library.config as config
 import logging
 
 import matplotlib.pyplot as plt
+import numpy as np
 from matplotlib.axes import Axes
 from typing import Sequence, Optional, Tuple, Any
 import pandas as pd
@@ -224,3 +225,57 @@ def plot_pie_chart(labels: Sequence[str],
         ax.set_title(title, fontweight='bold')
 
     return ax
+
+def plot_histogram_of_counts(column: pd.Series,
+                             title: Optional[str] = None,
+                             xlabel: Optional[str] = None,
+                             ylabel: str = "Frequency",
+                             bins_step: int = 5) -> None:
+    """
+    Plot a histogram of counts for a given pandas Series (column), showing only nonzero values.
+
+    Parameters
+    ----------
+    column : pandas.Series
+        The data column to plot. Only nonzero values are included.
+    title : str, optional
+        Title of the plot. If None, uses 'Histogram of <column name>'.
+    xlabel : str, optional
+        Label for the x-axis. If None, uses the column name.
+    ylabel : str, default "Frequency"
+        Label for the y-axis.
+    bins_step : int, default 5
+        Step size for x-tick labels.
+
+    Returns
+    -------
+    None
+        Displays the histogram.
+
+    Notes
+    -----
+    If there are no nonzero values in the column, the function prints a message and does not plot.
+
+    Examples
+    --------
+    >>> s = pd.Series([0, 1, 2, 2, 3, 5, 0, 7])
+    >>> plot_histogram_of_counts(s, title="Value Distribution")
+    """
+    data = column[column > 0]
+    if data.empty:
+        print("No nonzero values to plot.")
+        return
+
+    min_val = int(data.min())
+    max_val = int(data.max())
+    bins = np.arange(min_val, max_val + 2)  # +2 to include max in bin edges
+
+    plt.figure(figsize=(10, 4))
+    plt.hist(data, bins=bins, color='blue', alpha=0.7)
+    plt.title(title or f'Histogram of {column.name}')
+    plt.xlabel(xlabel or column.name)
+    plt.ylabel(ylabel)
+    plt.grid(axis='y', alpha=0.75)
+    plt.xticks(np.arange(min_val, max_val + 1, bins_step))
+    plt.tight_layout()
+    plt.show()
