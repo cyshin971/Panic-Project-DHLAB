@@ -100,6 +100,7 @@ def read_csv(file_path: Path) -> pd.DataFrame:
     except pd.errors.ParserError as e:
         raise ValueError(f"Error parsing the file {file_path}: {e}")
 
+# TODO: handle cases when there are columns in the row that are not in the DataFrame
 def add_row(df: pd.DataFrame, row: dict) -> None:
     """
     Adds a row to the DataFrame in place.
@@ -161,6 +162,33 @@ def find_unique_row(df: pd.DataFrame, col: str, value) -> tuple:
     
     index = matching_rows.index[0]
     return index, matching_rows.iloc[0]
+
+def filter_for_cols(df: pd.DataFrame, columns: list[str]) -> pd.DataFrame:
+    """
+    Filters a DataFrame to include only the specified columns.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        The DataFrame to filter.
+    columns : list of str
+        The list of column names to keep in the DataFrame.
+
+    Returns
+    -------
+    pd.DataFrame
+        A DataFrame containing only the specified columns.
+
+    Raises
+    ------
+    ValueError
+        If any specified column is not present in the DataFrame.
+    """
+    missing_cols = [col for col in columns if col not in df.columns]
+    if missing_cols:
+        raise ValueError(f"Missing columns: {missing_cols}")
+
+    return df[columns].copy()
 
 def filter_for_list(df: pd.DataFrame, column: str, values: list) -> pd.DataFrame:
     """
@@ -252,6 +280,9 @@ def move_column(df: pd.DataFrame, column_name: str, new_position: int) -> None:
     """
     if column_name not in df.columns:
         raise ValueError(f"Column '{column_name}' not found in DataFrame.")
+    if new_position < 0:
+        # If new_position is negative, it will be treated as an offset from the end.
+        new_position += len(df.columns)
     if not (0 <= new_position < len(df.columns)):
         raise ValueError(f"New position '{new_position}' is out of bounds.")
 
