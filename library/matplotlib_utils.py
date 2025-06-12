@@ -230,7 +230,9 @@ def plot_histogram_of_counts(column: pd.Series,
                              title: Optional[str] = None,
                              xlabel: Optional[str] = None,
                              ylabel: str = "Frequency",
-                             bins_step: int = 5) -> None:
+                             bins_step: int = 5,
+                             zero_start: bool = True,
+                             exclude_zero: bool = False) -> None:
     """
     Plot a histogram of counts for a given pandas Series (column), showing only nonzero values.
 
@@ -261,13 +263,18 @@ def plot_histogram_of_counts(column: pd.Series,
     >>> s = pd.Series([0, 1, 2, 2, 3, 5, 0, 7])
     >>> plot_histogram_of_counts(s, title="Value Distribution")
     """
-    data = column[column > 0]
+    if exclude_zero:
+        data = column[column > 0]
+    else:
+        data = column[column >= 0]
     if data.empty:
-        print("No nonzero values to plot.")
+        logging.warning("No data to plot (all values are zero or excluded).")
         return
 
     min_val = int(data.min())
     max_val = int(data.max())
+    if zero_start:
+        min_val = 0  # Start from zero if specified
     bins = np.arange(min_val, max_val + 2)  # +2 to include max in bin edges
 
     plt.figure(figsize=(10, 4))
