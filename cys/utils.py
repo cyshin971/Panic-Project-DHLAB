@@ -17,6 +17,7 @@ def calculate_days_before_panic(df, patient_id, delta_days=3, lookback_limit=7):
         index = patient_data[patient_data['date'] == panic_date].index[0]
         event_id = patient_data.loc[index, 'entry_id']
         df.loc[index, 'dbp'] = 0
+        df.loc[index, 'ref_event_id'] = None
         for j in range(1, delta_days + 1):
             prior_date = panic_date - pd.Timedelta(days=j)
             if prior_date in entry_dates:
