@@ -227,12 +227,16 @@ def plot_pie_chart(labels: Sequence[str],
     return ax
 
 def plot_histogram_of_counts(column: pd.Series,
-                             title: Optional[str] = None,
-                             xlabel: Optional[str] = None,
-                             ylabel: str = "Frequency",
-                             bins_step: int = 5,
-                             zero_start: bool = True,
-                             exclude_zero: bool = False) -> None:
+                            title: Optional[str] = None,
+                            figsize: Tuple[float, float] = (10, 4),
+                            xlabel: Optional[str] = None,
+                            ylabel: str = "Frequency",
+                            ymax: Optional[int] = None,
+                            xmax: Optional[int] = None,
+                            bins_step: int = 5,
+                            zero_start: bool = True,
+                            exclude_zero: bool = False,
+                            color: str = 'blue') -> None:
     """
     Plot a histogram of counts for a given pandas Series (column), showing only nonzero values.
 
@@ -242,12 +246,24 @@ def plot_histogram_of_counts(column: pd.Series,
         The data column to plot. Only nonzero values are included.
     title : str, optional
         Title of the plot. If None, uses 'Histogram of <column name>'.
+    figsize : tuple of float, default (10, 4)
+        Size of the figure in inches, as (width, height).
     xlabel : str, optional
         Label for the x-axis. If None, uses the column name.
     ylabel : str, default "Frequency"
         Label for the y-axis.
+    ymax : int, optional
+        Maximum value for the y-axis. If None, auto-scales based on data.
+    xmax : int, optional
+        Maximum value for the x-axis. If None, auto-scales based on data.
     bins_step : int, default 5
         Step size for x-tick labels.
+    zero_start : bool, default True
+        If True, histogram x-axis starts at zero.
+    exclude_zero : bool, default False
+        If True, exclude zero values from the histogram.
+    color : str, default 'blue'
+        Color of the histogram bars.
 
     Returns
     -------
@@ -275,14 +291,20 @@ def plot_histogram_of_counts(column: pd.Series,
     max_val = int(data.max())
     if zero_start:
         min_val = 0  # Start from zero if specified
+    if xmax is not None:
+        max_val = xmax
     bins = np.arange(min_val, max_val + 2)  # +2 to include max in bin edges
 
-    plt.figure(figsize=(10, 4))
-    plt.hist(data, bins=bins, color='blue', alpha=0.7)
+    plt.figure(figsize=figsize)
+    plt.hist(data, bins=bins, color=color, alpha=0.7)
     plt.title(title or f'Histogram of {column.name}')
     plt.xlabel(xlabel or column.name)
     plt.ylabel(ylabel)
     plt.grid(axis='y', alpha=0.75)
     plt.xticks(np.arange(min_val, max_val + 1, bins_step))
+    if ymax is not None:
+        plt.ylim(top=ymax)
+    if xmax is not None:
+        plt.xlim(right=xmax)
     plt.tight_layout()
     plt.show()
