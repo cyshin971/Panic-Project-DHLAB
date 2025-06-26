@@ -6,7 +6,7 @@ def calculate_days_before_panic(df, patient_id, delta_days=3, lookback_limit=7):
     entry_dates_series = patient_data['date']
     if len(set(entry_dates_series)) != len(entry_dates_series):
         raise ValueError(f"Duplicate dates found for patient {patient_id}. Please check the data.")
-    panic_dates_series = patient_data[patient_data['dbp'] == 0]['date']
+    panic_dates_series = patient_data[patient_data['panic_label'] == 1]['date']
     if len(set(panic_dates_series)) != len(panic_dates_series):
         raise ValueError(f"Duplicate panic dates found for patient {patient_id}. Please check the data.")
     
