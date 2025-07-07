@@ -1,12 +1,16 @@
-# Panic-Project-CYS
+# Panic-Project-DHLAB
 
 > Digital Healthcare Laboratory  
 > Yonsei University College of Medicine  
 > Department of Biomedical Systems Informatics
 
-This project contains the code to perform panic prediction from tabular data (socio-demographic, questionnaire, daily log, life log)
+This project contains code to perform panic prediction from tabular data (socio-demographic, questionnaire, daily log, and life log data)
 
 ---
+## Data Overview
+
+Questionnaire data consists of:
+- Clinical psychological survey data such as (PHQ, MDQ, STAI, CTQ, etc.)
 
 Life Log data consists of:
 - Step features
@@ -19,6 +23,7 @@ Daily Log data consists of self-reported:
 - Daily life log features (smoking, menstruation, coffee, etc.)
 
 ---
+## Code Overview
 
 This repository contains code for
 1. Data scraping
@@ -32,7 +37,6 @@ As well as code for the following 3 models
 - Panic severity prediction model
 
 ---
-
 ## Instructions
 
 ### Data Scraping
