@@ -49,11 +49,17 @@ As well as code for the following 3 models
 5. Run All `data_imputation.ipynb`
 6. Run All `data_analysis.ipynb`
 
-> Install packages required specified in each `ipynb`
+> Install required packages specified in each `ipynb`
 
-### Panic Severity 
+---
+
+### Next day panic prediction model 1
+
+### Next day panic prediction model 2
+
+### Panic severity prediction model 
 1. Under ⚙️|Settings, change `scraped_data_filename` to selected `scraped_data`
-2. Under ⚙️|Settings, set `dbp` param to desired days before panic for data processing and datset construction
+2. Under ⚙️|Settings, set `dbp` param to desired days before panic for data processing and dataset construction
 3. Run All `severity_multiclass_pycare.ipynb`
 
-> Install packages required specified in each `ipynb`
+> Install required packages specified in each `ipynb`
