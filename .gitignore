@@ -1,15 +1,7 @@
 /_data
 /_tmp
 /_output
-/_results
+/_archive
 
 **/logs.log
 **/__pycache__/
-
-# Junyeol Lee
-
-# Chi Young Shin
-/cys/_tmp
-/cys/_output
-/cys/_results
-Panic-Project-CYS.code-workspace
