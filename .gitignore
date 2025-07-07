@@ -1,4 +1,7 @@
 /_data
+/_tmp
+/_output
+/_results
 
 **/logs.log
 **/__pycache__/
