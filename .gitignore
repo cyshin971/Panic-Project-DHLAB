@@ -2,6 +2,12 @@
 /_tmp
 /_output
 /_archive
+**/.venv
 
+/data_scraping/PXPN_전처리/1_stage/preprocessed
+/data_scraping/SYM_전처리/data/processed
+/data_scraping/PXPN_전처리/1_stage/초기_파일_폴더/PXPN/PXPN_dropbox/pixelpanic_raw_data.zip
+/data_scraping/PXPN_전처리/1_stage/초기_파일_폴더/PXPN/ActiveData
+/data_scraping/PXPN_전처리/1_stage/초기_파일_폴더/PXPN/PXPN_SurveyResponse
 **/logs.log
 **/__pycache__/
