@@ -40,6 +40,47 @@ As well as code for the following 3 models
 ## Instructions
 
 ### Data Scraping
+1. Download the `pixelpanic_raw_data.zip` on dropbox
+2. move the `pixelpanic_raw_data.zip` to `/data_scraping/PXPN_전처리/1_stage/초기_파일_폴더/PXPN/PXPN_dropbox` directory
+3. Run All `PXPN_questionare_preprocessing_for_all_patients_no_ffill.ipynb`
+4. Run files in `/data_scraping/PXPN_전처리/2_stage/src`
+    Run `step.py`
+    Run `step_delta.py`
+    Run `step_analysis.py`
+    Run `sleep_type.py`
+    Run `sleep_log.py`
+    Run `HR.py`
+    Run `HR_statistics.py`
+    Run `HR_interpolation.py`
+    Run `HR_cosinor.py`
+    Run `HR_cosinor_delta.py`
+    Run `HR_bandpower_analysis.py`
+5. Run `merge.py` in `/data_scraping/PXPN_전처리/3_stage`
+6. Run files in /data_scraping/SYM_전처리/src/1_preprocessing
+    Run `start_date.py`
+    Run `smoking_diet_mens.py`
+    Run `sleep.py`
+    Run `questionnaire.py`
+    Run `other_panic.py`
+    Run `other_exercise.py`
+    Run `other_demographics.py`
+    Run `other_coffee.py`
+    Run `other_alcohol.py`
+    Run `lifelog_HR.py`
+    Run `foot.py`
+    Run `diary.py`
+7. Run files in /data_scraping/SYM_전처리/src/2_data_analysis
+    Run `step_delta.py`
+    Run `step_analysis.py`
+    Run `HR_statistics.py`
+    Run `HR_interpolation.py`
+    Run `HR_cosinor.py`
+    Run `HR_cosinor_delta.py`
+    Run `HR_bandpower_analysis.py`
+8. Run `merge.py` in /data_scraping/SYM_전처리/src/3_merge
+9. Run `merge.py` in /data_scraping/SYM_PXPN_merge
+
+
 
 ### Data Preprocessing
 1. Move the `scraped_data.csv` to `./_data` directory
