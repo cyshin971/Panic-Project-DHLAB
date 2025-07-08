@@ -89,13 +89,13 @@ As well as code for the following 3 models
 4. Run All `data_preprocessing.ipynb`
 5. Run All `data_imputation.ipynb`
 6. Run All `data_analysis.ipynb`
-
+7. Run `full_dataset.py`
 > Install required packages specified in each `ipynb`
 
 ---
 
 ### Next day panic prediction model 1
-
+1. Run `/Panic-Project-DHLAB/model/Gradient_boosting_clasifier.py` with `test_set.csv` or new dataset
 ### Next day panic prediction model 2
 
 ### Panic severity prediction model 
