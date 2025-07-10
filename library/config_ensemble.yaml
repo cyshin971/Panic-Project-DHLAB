@@ -1,0 +1,80 @@
+DATA_DIR: ""                                        # Directory path to load data files
+RESULT_DIR: ""                                      # Directory path to save results
+HR_FILTER: "720"                                    # Heartrate points (360/720)
+SCENARIO: "A+B"                                     # Scenario: A+B / A / B
+
+COLUMNS:    # Columns for each categories
+  basic:
+    - ID
+    - date
+    - panic
+    - next_day_panic
+  demo:
+    - gender
+    - age
+    - marriage
+    - job
+    - smkHx
+    - drinkHx
+    - suicideHx
+  daily:
+    - exercise
+    - alcohol
+    - coffee
+    - menstruation
+    - smoking
+  mood:
+    - positive_feeling
+    - negative_feeling
+    - positive_E
+    - negative_E
+    - anxiety
+    - annoying
+  lifelog:
+    - HR_var
+    - HR_max
+    - HR_mean
+    - HR_hvar_mean
+    - HR_acrophase
+    - HR_amplitude
+    - HR_mesor
+    - HR_acrophase_difference
+    - HR_acrophase_difference_2d
+    - HR_amplitude_difference
+    - HR_amplitude_difference_2d
+    - HR_mesor_difference
+    - HR_mesor_difference_2d
+    - bandpower(0.001-0.0005Hz)
+    - bandpower(0.0005-0.0001Hz)
+    - bandpower(0.0001-0.00005Hz)
+    - bandpower(0.00005-0.00001Hz)
+    - steps
+    - steps_maximum
+    - steps_mean
+    - step_hvar_mean
+    - step_delta
+    - step_max_delta
+    - step_mean_delta
+    - step_hvar_mean_delta
+    - step_delta2
+    - step_max_delta2
+    - step_mean_delta2
+    - step_hvar_mean_delta2
+    - steps_variance
+    - SLT1
+    - SLT2
+    - SLT3
+    - SLT4
+    - SLT5
+    - SLT6
+    - total_sleep
+  survey5:
+    - STAI_X2
+    - CSM
+    - CTQ_1
+    - CTQ_2
+    - CTQ_3
+    - CTQ_4
+    - CTQ_5
+    - KRQ
+    - BRIAN

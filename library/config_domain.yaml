@@ -1,0 +1,116 @@
+DATA_DIR: ""                                              # Directory path to load data files
+SAVE_DIR: ""                                              # Directory path to save results
+PANIC_FILE: "panic_pre_data.csv"                          # Panic filename
+DEMO_FILE:  "panic_demography_data.csv"                   # Demograpy filename
+HR_FILTER: 720                                            # Heartrate points (360/720)
+SCENARIO: "A+B"                                           # Scenario: A+B / A / B
+FULL_DATASET: True                                        # True for Scenario A+B, False for Scenario A or B
+PANIC: False                                              # True for Scenario B, False for Scenario A (Use only entries about panic day or not)
+PYCARET: True                                             # Use pycaret for selecting the best model efficiently 
+USE_SAMPLER: True                                         # True for sampling strategy, False for no
+SAMPLER_TYPE: "smote"                                     # smote / adasyn / smoteenn / smotetomek / borderline / kmeans / under / nearmiss / clustercentroids
+SAMPLING_STRATEGY: 0.5  
+K_NEIGHBORS: 3
+
+COLUMNS:
+  basic:
+    - ID
+    - date
+    - panic
+    - next_day_panic
+  demo:
+    - gender
+    - age
+    - marriage
+    - job
+    - smkHx
+    - drinkHx
+    - suicideHx
+  daily:
+    - exercise
+    - alcohol
+    - coffee
+    - menstruation
+    - smoking
+  mood:
+    - positive_feeling
+    - negative_feeling
+    - positive_E
+    - negative_E
+    - anxiety
+    - annoying
+  lifelog:
+    - HR_var
+    - HR_max
+    - HR_mean
+    - HR_hvar_mean
+    - HR_acrophase
+    - HR_amplitude
+    - HR_mesor
+    - HR_acrophase_difference
+    - HR_acrophase_difference_2d
+    - HR_amplitude_difference
+    - HR_amplitude_difference_2d
+    - HR_mesor_difference
+    - HR_mesor_difference_2d
+    - bandpower(0.001-0.0005Hz)
+    - bandpower(0.0005-0.0001Hz)
+    - bandpower(0.0001-0.00005Hz)
+    - bandpower(0.00005-0.00001Hz)
+    - steps
+    - steps_maximum
+    - steps_mean
+    - step_hvar_mean
+    - step_delta
+    - step_max_delta
+    - step_mean_delta
+    - step_hvar_mean_delta
+    - step_delta2
+    - step_max_delta2
+    - step_mean_delta2
+    - step_hvar_mean_delta2
+    - steps_variance
+    - SLT1
+    - SLT2
+    - SLT3
+    - SLT4
+    - SLT5
+    - SLT6
+    - total_sleep
+  survey5:
+    - STAI_X2
+    - CSM
+    - CTQ_1
+    - CTQ_2
+    - CTQ_3
+    - CTQ_4
+    - CTQ_5
+    - KRQ
+    - BRIAN
+
+csv_files:
+  base_daily:   base_daily.csv
+  base_lifelog: base_lifelog.csv
+  base_mood:    base_mood.csv
+  base_survey5: base_survey5.csv
+
+prob_models:
+  - lr
+  - knn
+  - nb
+  - dt
+  - rf
+  - xgboost
+  - lightgbm
+  - catboost
+  - qda
+  - mlp
+  - ada
+  - gbc
+  - et
+  - svm
+  - rbfsvm
+
+seed: 42
+
+shap_bg_size: 1000
