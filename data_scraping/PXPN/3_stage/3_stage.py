@@ -1,8 +1,18 @@
+
+
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+zip_path = ("/Panic-Project-DHLAB/raw_data/PXPN/pixelpanic_raw_data.zip")
+output_folder = ("/Panic-Project-DHLAB/tmp/PXPN")
+enroll_path = ("/Panic-Project-DHLAB/raw_data/PXPN/1. 픽셀패닉 enroll 정보_250516.csv")
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
 import pandas as pd
 import zipfile
 from io import BytesIO
-
-
+import os 
 import pandas as pd
 from functools import reduce
 
@@ -14,14 +24,19 @@ def load_and_clean(path):
     df = df.loc[:, ~df.columns.str.contains("^Unnamed")]
     return df
 
-# (2) 모든 CSV 불러오기
-preprocessed = load_and_clean("/Users/lee-junyeol/Downloads/github/Panic-Project-DHLAB/junyeol_lee/panic 총정리/PXPN_전처리/1_stage/전처리 결과/processed.csv")
-band_power            = load_and_clean("/Users/lee-junyeol/Downloads/github/Panic-Project-DHLAB/junyeol_lee/panic 총정리/PXPN_전처리/2_stage/processed/bandpower_720.csv")
-circadian_delta       = load_and_clean("/Users/lee-junyeol/Downloads/github/Panic-Project-DHLAB/junyeol_lee/panic 총정리/PXPN_전처리/2_stage/processed/circadian_delta_720.csv")
-step_delta = load_and_clean("/Users/lee-junyeol/Downloads/github/Panic-Project-DHLAB/junyeol_lee/panic 총정리/PXPN_전처리/2_stage/processed/step_delta.csv")
-HR_date               = load_and_clean("/Users/lee-junyeol/Downloads/github/Panic-Project-DHLAB/junyeol_lee/panic 총정리/PXPN_전처리/2_stage/processed/HR_date_fixed.csv")
-sleep                 = load_and_clean("/Users/lee-junyeol/Downloads/github/Panic-Project-DHLAB/junyeol_lee/panic 총정리/PXPN_전처리/2_stage/processed/sleep_type.csv")
 
+output_path = os.path.join(output_folder, "processed.csv")
+preprocessed = load_and_clean(output_path)
+output_path = os.path.join(output_folder, "bandpower_720.csv")
+band_power            = load_and_clean(output_path)
+output_path = os.path.join(output_folder, "circadian_delta_720.csv")
+circadian_delta       = load_and_clean(output_path)
+output_path = os.path.join(output_folder, "step_delta.csv")
+step_delta = load_and_clean(output_path)
+output_path = os.path.join(output_folder, "HR_date_fixed.csv")
+HR_date               = load_and_clean(output_path)
+output_path = os.path.join(output_folder, "sleep_type.csv")
+sleep                 = load_and_clean(output_path)
 # (3) 날짜 기반 데이터 리스트
 date_dfs = [
     preprocessed,
@@ -79,12 +94,11 @@ cols = merged_full.columns.tolist()
 ordered_cols = ['ID', 'date', 'panic'] + [c for c in cols if c not in ['ID', 'date', 'panic']]
 merged_full = merged_full[ordered_cols]
 
-merged_full.to_csv("/Users/lee-junyeol/Downloads/github/Panic-Project-DHLAB/junyeol_lee/panic 총정리/PXPN_전처리/result/result_before_severity.csv")
-
+output_path = os.path.join(output_folder, "result_before_severity.csv")
+merged_full.to_csv(output_path, index=False)
 
 # 1. Load all_data and prepare the 'severity' column
-all_data_path = "/Users/lee-junyeol/Downloads/github/Panic-Project-DHLAB/junyeol_lee/panic 총정리/PXPN_전처리/result/result_before_severity.csv"
-all_data = pd.read_csv(all_data_path, dtype={"ID": str})
+all_data = pd.read_csv(output_path, dtype={"ID": str})
 
 # Ensure 'date' is in datetime.date format for matching
 all_data["date"] = pd.to_datetime(all_data["date"]).dt.date
@@ -94,7 +108,7 @@ all_data["severity"] = pd.NA
 
 
 # 2. Fill 'severity' for PXPN-group patients by reading each patient's panic CSV inside the nested ZIP
-zip_path = "/Users/lee-junyeol/Downloads/github/Panic-Project-DHLAB/junyeol_lee/panic 총정리/PXPN_전처리/1_stage/초기_파일_폴더/PXPN/PXPN_dropbox/pixelpanic_raw_data.zip"
+zip_path = zip_path
 with zipfile.ZipFile(zip_path, "r") as outer_zip:
     # patient indices run from 6 to 40 (inclusive)
     for i in range(6, 41):
@@ -135,5 +149,5 @@ num_missing = all_data["severity"].isna().sum()
 print(f"Number of rows with missing severity: {num_missing}")
 
 # 6. Save the updated DataFrame
-output_path = "/Users/lee-junyeol/Downloads/github/Panic-Project-DHLAB/junyeol_lee/panic 총정리/PXPN_전처리/result/result_720_no_fill.csv"
+output_path = "/Users/lee-junyeol/Documents/GitHub/Panic-Project-DHLAB/data/PXPN_720.csv"
 all_data.to_csv(output_path, index=False)
