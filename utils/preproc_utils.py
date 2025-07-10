@@ -48,3 +48,20 @@ def process_calculate_days_before_panic(df, delta_days=3, lookback_limit=7):
     # replace None values in 'n_prior_data' with 0
     df['n_prior_data'] = df['n_prior_data'].fillna(0).astype(int)
     return df
+
+def add_next_day_panic(df):
+    df_full = df.copy()
+
+    if 'panic_label' not in df_full.columns:
+        df_full['panic_label'] = df_full['panic'].eq(2).astype(int)   # panic == 2 → 1, else → 0
+
+    # 현재 행의 ID_date + 1과 동일한 값을 entry_id에서 찾고 그때의 panic_label 값이 1이면 현재 행의 next_day_panic에 1 아니면 0
+    df_full['target_entry_id'] = (
+        df_full['ID'].astype(str) + '_' +
+        (df_full['date'] + pd.Timedelta(days=1)).dt.strftime('%Y-%m-%d')
+    )
+    mapping = df_full.set_index('entry_id')['panic_label'].to_dict()
+
+    df_full['next_day_panic'] = df_full['target_entry_id'].map(mapping).eq(1).astype(int)
+    print(df_full[['entry_id','target_entry_id','panic_label','next_day_panic']])
+    return df_full
