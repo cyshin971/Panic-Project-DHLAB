@@ -12,9 +12,9 @@ warnings.filterwarnings("ignore", category=UserWarning)
 df = pd.read_csv('/home/junyeollee/.jupyter/panic/2025.06.26/imputed_720/result/df_720_full.csv')
 df = df.drop(['Unnamed: 0', 'panic_label', 'ID', 'date', 'severity'], axis=1)
 
-df_test = pd.read_csv('/home/junyeollee/.jupyter/panic/2025.06.26/imputed_720/result/test_set.csv')
-X_test = df_test.drop(columns=['label'])
-y_test = df_test['label'].values
+df_test = pd.read_csv('/Panic-Project-DHLAB/model/test_set.csv')
+X_test = df_test.drop(columns=['next_day_panic', 'Unnamed: 0', 'panic_label', 'ID', 'date', 'severity'], errors='ignore')
+y_test = df_test['next_day_panic'].values
 
 # 2. 모델 로드
 model = joblib.load('/home/junyeollee/.jupyter/panic/2025.06.26/imputed_720/result/gb_model.pkl')
