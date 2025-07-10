@@ -69,7 +69,22 @@ As well as code for the following 3 models
 ### Next day panic prediction model 1
 1. Run `/Panic-Project-DHLAB/model/Gradient_boosting_clasifier.py` with `test_set.csv` or new dataset
 ### Next day panic prediction model 2
-
+To select the best model for each domain:
+1. ⚙️|Settings, set the parameters in `./library/config_domain.yaml`
+2. Run the domain_main script, passing in the config file:
+    ```bash
+    PYTHONPATH=./Panic-Project-DHLAB \
+    python ./panic_domain_model/domain_main.py \
+    --config ./library/config_domain.yaml
+    ```
+To create an ensemble model using all the best domain models:
+1. ⚙️|Settings, set the parameters in `./library/config_ensemble.yaml`
+2. Run the domain_ensemble script, passing in the config file:
+    ```bash
+    PYTHONPATH=./Panic-Project-DHLAB \
+    python ./panic_domain_model/domain_ensemble.py \
+    --config ./library/config_ensemble.yaml
+    ```
 ### Panic severity prediction model 
 1. Under ⚙️|Settings, change `scraped_data_filename` to selected `scraped_data`
 2. Under ⚙️|Settings, set `dbp` param to desired days before panic for data processing and dataset construction
