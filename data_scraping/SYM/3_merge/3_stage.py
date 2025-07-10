@@ -1,5 +1,7 @@
 import pandas as pd
 from functools import reduce
+import os
+output_folder = ("/Panic-Project-DHLAB/tmp/SYM")
 
 # (1) CSV 파일 로드 & 'Unnamed' 인덱스 컬럼 제거 함수
 def load_and_clean(path):
@@ -8,23 +10,37 @@ def load_and_clean(path):
     return df
 
 # (2) 모든 CSV 불러오기
-start_date = load_and_clean("/Users/lee-junyeol/Downloads/github/Panic-Project-DHLAB/junyeol_lee/panic 총정리/SYM_전처리/data/processed/start_date.csv")
+output_path = os.path.join(output_folder, "start_date.csv")
+start_date = load_and_clean(output_path)
 start_date['start_date'] = pd.to_datetime(start_date['start_date'], errors='coerce')
-Alcohol_per_date      = load_and_clean("/Users/lee-junyeol/Downloads/github/Panic-Project-DHLAB/junyeol_lee/panic 총정리/SYM_전처리/data/processed/alcohol_per_date.csv")
-band_power            = load_and_clean("/Users/lee-junyeol/Downloads/github/Panic-Project-DHLAB/junyeol_lee/panic 총정리/SYM_전처리/data/processed/bandpower_fixed_720.csv")
-circadian_delta       = load_and_clean("/Users/lee-junyeol/Downloads/github/Panic-Project-DHLAB/junyeol_lee/panic 총정리/SYM_전처리/data/processed/circadian_delta_720.csv")
-coffee_date           = load_and_clean("/Users/lee-junyeol/Downloads/github/Panic-Project-DHLAB/junyeol_lee/panic 총정리/SYM_전처리/data/processed/coffee_per_date.csv")
-emotion_diary         = load_and_clean("/Users/lee-junyeol/Downloads/github/Panic-Project-DHLAB/junyeol_lee/panic 총정리/SYM_전처리/data/processed/emotion_diary.csv")
-exercise_date         = load_and_clean("/Users/lee-junyeol/Downloads/github/Panic-Project-DHLAB/junyeol_lee/panic 총정리/SYM_전처리/data/processed/exercise_per_date.csv")
-step_delta = load_and_clean("/Users/lee-junyeol/Downloads/github/Panic-Project-DHLAB/junyeol_lee/panic 총정리/SYM_전처리/data/processed/step_delta.csv")
-HR_date               = load_and_clean("/Users/lee-junyeol/Downloads/github/Panic-Project-DHLAB/junyeol_lee/panic 총정리/SYM_전처리/data/processed/HR_date_fixed.csv")
-panic                 = load_and_clean("/Users/lee-junyeol/Downloads/github/Panic-Project-DHLAB/junyeol_lee/panic 총정리/SYM_전처리/data/processed/panic_by_date.csv") \
-                            .drop(columns=['time','datetime'], errors='ignore')
-questionnaire_bydate  = load_and_clean("/Users/lee-junyeol/Downloads/github/Panic-Project-DHLAB/junyeol_lee/panic 총정리/SYM_전처리/data/processed/questionnaire.csv")
-sleep                 = load_and_clean("/Users/lee-junyeol/Downloads/github/Panic-Project-DHLAB/junyeol_lee/panic 총정리/SYM_전처리/data/processed/sleep_summary.csv")
-smoking_diet_mens     = load_and_clean("/Users/lee-junyeol/Downloads/github/Panic-Project-DHLAB/junyeol_lee/panic 총정리/SYM_전처리/data/processed/smoking_diet_mens.csv")
-demographic_data      = load_and_clean("/Users/lee-junyeol/Downloads/github/Panic-Project-DHLAB/junyeol_lee/panic 총정리/SYM_전처리/data/processed/demographic_data.csv")
-diary = load_and_clean("/Users/lee-junyeol/Downloads/github/Panic-Project-DHLAB/junyeol_lee/panic 총정리/SYM_전처리/data/processed/diary.csv")
+output_path = os.path.join(output_folder, "alcohol_per_date.csv")
+Alcohol_per_date      = load_and_clean(output_path)
+output_path = os.path.join(output_folder, "bandpower_fixed_720.csv")
+band_power            = load_and_clean(output_path)
+output_path = os.path.join(output_folder, "circadian_delta_720.csv")
+circadian_delta       = load_and_clean(output_path)
+output_path = os.path.join(output_folder, "coffee_per_date.csv")
+coffee_date           = load_and_clean(output_path)
+output_path = os.path.join(output_folder, "emotion_diary.csv")
+emotion_diary         = load_and_clean(output_path)
+output_path = os.path.join(output_folder, "exercise_per_date.csv")
+exercise_date         = load_and_clean(output_path)
+output_path = os.path.join(output_folder, "step_delta.csv")
+step_delta = load_and_clean(output_path)
+output_path = os.path.join(output_folder, "HR_date_fixed.csv")
+HR_date               = load_and_clean(output_path)
+output_path = os.path.join(output_folder, "panic_by_date.csv")
+panic                 = load_and_clean(output_path).drop(columns=['time','datetime'], errors='ignore')
+output_path = os.path.join(output_folder, "questionnaire.csv")
+questionnaire_bydate  = load_and_clean(output_path)
+output_path = os.path.join(output_folder, "sleep_summary.csv")
+sleep                 = load_and_clean(output_path)
+output_path = os.path.join(output_folder, "smoking_diet_mens.csv")
+smoking_diet_mens     = load_and_clean(output_path)
+output_path = os.path.join(output_folder, "demographic_data.csv")
+demographic_data      = load_and_clean(output_path)
+output_path = os.path.join(output_folder, "diary.csv")
+diary = load_and_clean(output_path)
 # (3) 날짜 기반 데이터 리스트
 date_dfs = [
     Alcohol_per_date,
@@ -289,7 +305,6 @@ if len(dup_idxs) > 1:
 merged_full = merged_full[~merged_full['ID'].isin(['SYM2-1-412', 'SYM2-1-425'])]
 merged_full = merged_full.drop_duplicates(subset=['ID','date'])
 print(len((merged_full['ID'].unique())))
-# (15) 저장
-merged_full.to_csv("/Users/lee-junyeol/Downloads/github/Panic-Project-DHLAB/junyeol_lee/panic 총정리/SYM_전처리/data/result/result_diary_720_no_ffill.csv", index=False)
 
-print("✅ 저장 완료: result.csv / result_dropna.csv")
+output_path = "/Users/lee-junyeol/Documents/GitHub/Panic-Project-DHLAB/data/SYM_720.csv"
+merged_full.to_csv(output_path, index=False)
