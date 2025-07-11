@@ -37,9 +37,20 @@ As well as code for the following 3 models
 - Panic severity prediction model
 
 ---
+## Required Packages
+`Python Version = 3.10`
+- `ipykernel`
+- `pandas`
+- `openpyxl`
+- `xlrd`
+- `mne`
+- `CosinorPy`
+- `seaborn`
+
 ## Instructions
 
 ### Setup
+1. Install required packages
 1. Navigate to the shared dropbox `픽셀패닉 데이터_연세대 제공용`
 2. Download `픽셀패닉 Raw Data` folder
     - rename to `pixelpanic_raw_data.zip`
