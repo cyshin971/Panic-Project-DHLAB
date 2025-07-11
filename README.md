@@ -45,22 +45,24 @@ As well as code for the following 3 models
 3. Download the `픽셀패닉 enroll 정보` and move to `/raw_data/PXPN`
 3. Dowonload the SYM1, SYM2 excel files
 4. move the SYM excel files to `/data_scraping/raw_data/PXPN`
-5. Run  `/data_scraping/PXPN/1_stage.ipynb`
-        `/data_scraping/PXPN/2_stage.ipynb`
-        `/data_scraping/PXPN/3_stage.ipynb`
-6. Run  `/data_scraping/SYM/1_stage_SYM.ipynb`
-        `/data_scraping/SYM/2_stage_SYM.ipynb`
-        `/data_scraping/SYM/3_stage_SYM.ipynb`
-7. Run  `/data_scraping/SYM_PXPN_merge/merge.ipynb`
+5. Run PXPN data scraping notebooks
+    1. `./data_scraping/PXPN/1_stage.ipynb`  
+    2. `./data_scraping/PXPN/2_stage.ipynb`  
+    3. `./data_scraping/PXPN/3_stage.ipynb`  
+6. Run SYM data scraping notebooks
+    1. `./data_scraping/SYM/1_stage_SYM.ipynb`  
+    2. `./data_scraping/SYM/2_stage_SYM.ipynb`  
+    3. `./data_scraping/SYM/3_stage_SYM.ipynb`  
+7. Run `./data_scraping/SYM_PXPN_merge/merge.ipynb`
+8. Check `merged_df.csv` in `./data/`
 
 
 ### Data Preprocessing
-1. Move the `scraped_data.csv` to `./_data` directory
-2. Open `data_preprocessing.ipynb`
+2. Open `./data_preprocessing/data_preprocessing.ipynb`
 3. Under ⚙️|Settings, change `scraped_data_filename` to selected `scraped_data`
-4. Run All `data_preprocessing.ipynb`
-5. Run All `data_imputation.ipynb`
-6. Run All `data_analysis.ipynb`
+4. Run All `./data_preprocessing/data_preprocessing.ipynb`
+5. Run All `./data_preprocessing/data_imputation.ipynb`
+6. Run All `./data_preprocessing/data_analysis.ipynb`
 7. Run `full_dataset.py`
 > Install required packages specified in each `ipynb`
 

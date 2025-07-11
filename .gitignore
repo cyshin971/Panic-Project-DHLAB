@@ -1,10 +1,9 @@
-/_data
 /data
 /raw_data
 /_tmp
 /_output
 /_archive
-**/.venv
+/panic_severity_model/_results
 
 /data_scraping/PXPN_전처리/1_stage/preprocessed
 /data_scraping/SYM_전처리/data/processed
@@ -13,4 +12,6 @@
 /data_scraping/PXPN_전처리/1_stage/전처리 결과
 
 **/logs.log
+**/.venv
+**/.DS_Store
 **/__pycache__/
