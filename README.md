@@ -51,6 +51,8 @@ As well as code for the following 3 models
 
 ### Setup
 1. Install required packages
+`conda env create -f environment.yml`
+`conda activate your_env_name`
 1. Navigate to the shared dropbox `픽셀패닉 데이터_연세대 제공용`
 2. Download `픽셀패닉 Raw Data` folder
     - rename to `pixelpanic_raw_data.zip`
