@@ -39,22 +39,35 @@ As well as code for the following 3 models
 ---
 ## Instructions
 
+### Setup
+1. Navigate to the shared dropbox `픽셀패닉 데이터_연세대 제공용`
+2. Download `픽셀패닉 Raw Data` folder
+    - rename to `pixelpanic_raw_data.zip`
+    - if the file is not compressed, compress to zip file
+3. Move `pixelpanic_raw_data.zip` to `./raw_data/PXPN/` directory
+    - Create `./raw_data/PXPN/` directory if it does not exist
+4. Download "픽셀패닉 enroll 정보"
+    - `1. 픽셀패닉 enroll 정보_250516.xlsx` (20250711)
+    - if there is an updated file, paths in `./data_scraping/PXPN/1_stage.ipynb` need to be changed
+5. Move "픽셀패닉 enroll 정보" to `/data_scraping/raw_data/PXPN/`
+4. Download `SYM.zip` File (from where ?)
+5. Extract `SYM.zip`
+6. Move the SYM excel files to `/data_scraping/raw_data/SYM`
+    - `backup_SYM2.xlsx`
+    - `backup_SYM1.xlsx`
+
 ### Data Scraping
-1. Download the `pixelpanic_raw_data.zip` on dropbox
-2. move the `pixelpanic_raw_data.zip` to `/raw_data/PXPN` directory
-3. Download the `픽셀패닉 enroll 정보` and move to `/raw_data/PXPN`
-3. Dowonload the SYM1, SYM2 excel files
-4. move the SYM excel files to `/data_scraping/raw_data/PXPN`
-5. Run PXPN data scraping notebooks
+1. Run PXPN data scraping notebooks
     1. `./data_scraping/PXPN/1_stage.ipynb`  
+        - Update `enroll_file_name` to "픽셀패닉 enroll 정보" file name
     2. `./data_scraping/PXPN/2_stage.ipynb`  
     3. `./data_scraping/PXPN/3_stage.ipynb`  
-6. Run SYM data scraping notebooks
+2. Run SYM data scraping notebooks
     1. `./data_scraping/SYM/1_stage_SYM.ipynb`  
     2. `./data_scraping/SYM/2_stage_SYM.ipynb`  
     3. `./data_scraping/SYM/3_stage_SYM.ipynb`  
-7. Run `./data_scraping/SYM_PXPN_merge/merge.ipynb`
-8. Check `merged_df.csv` in `./data/`
+3. Run `./data_scraping/SYM_PXPN_merge/merge.ipynb`
+4. Check `merged_df.csv` in `./data/`
 
 
 ### Data Preprocessing
