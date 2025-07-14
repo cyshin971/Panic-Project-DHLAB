@@ -8,16 +8,26 @@ from sklearn.metrics import (
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning)
 
-# 1. 데이터 로드 및 분할
-df = pd.read_csv('/home/junyeollee/.jupyter/panic/2025.06.26/imputed_720/result/df_720_full.csv')
-df = df.drop(['Unnamed: 0', 'panic_label', 'ID', 'date', 'severity'], axis=1)
 
-df_test = pd.read_csv('/Panic-Project-DHLAB/model/test_set.csv')
-X_test = df_test.drop(columns=['next_day_panic', 'Unnamed: 0', 'panic_label', 'ID', 'date', 'severity'], errors='ignore')
-y_test = df_test['next_day_panic'].values
+import config as cfg
+import pandas as pd
+from path_utils import get_file_path
+from pathlib import Path
+
+df_base_dir = "./data"
+model_base_dir = "./model"
+model_name = "gb_model.pkl"
+df_name = "test_set.csv"
+
+df_dir = get_file_path(df_base_dir, df_name)
+model_dir = get_file_path(model_base_dir, model_name)
+
+df = pd.read_csv(df_dir)
+X_test = df.drop(columns=['next_day_panic', 'Unnamed: 0', 'panic_label', 'ID', 'date', 'severity'], errors='ignore')
+y_test = df['next_day_panic'].values
 
 # 2. 모델 로드
-model = joblib.load('/home/junyeollee/.jupyter/panic/2025.06.26/imputed_720/result/gb_model.pkl')
+model = joblib.load(model_dir)
 
 
 # 4. Hold-out 테스트셋 전체 성능 평가

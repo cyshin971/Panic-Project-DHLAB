@@ -96,7 +96,10 @@ As well as code for the following 3 models
 ---
 
 ### Next day panic prediction model 1
-1. Run `/Panic-Project-DHLAB/model/Gradient_boosting_clasifier.py` with `test_set.csv` or new dataset
+1. Run `./model/Gradient_boosting_classifier.py` with your dataset.
+2. If you want to test with an existing datset,
+    run `/model/unseen_test_set.py`
+    and run `./model/Gradient_boosting_classifier.py`
 ### Next day panic prediction model 2
 To select the best model for each domain:
 1. ⚙️|Settings, set the parameters in `./library/config_domain.yaml`
