@@ -50,15 +50,12 @@ As well as code for the following 3 models
 ## Instructions
 
 ### Setup
-1. Install required packages
-# 1 create new environment
-conda create -n panic_environment python=3.10.18
-# 2 activate environment
-conda activate panic_environment
-# 3 install packages in requirements.txt
-pip install -r ./requirements.txt
-2. Navigate to the shared dropbox `픽셀패닉 데이터_연세대 제공용`
-3. Download `픽셀패닉 Raw Data` folder
+1. Install required packages:  
+- `cd <Panic-Project-DHLAB root directory>`
+- `conda env create -f dhlab_panic_env.yml`
+- `conda activate dhlab_panic_env`
+1. Navigate to the shared dropbox `픽셀패닉 데이터_연세대 제공용`
+2. Download `픽셀패닉 Raw Data` folder
     - rename to `pixelpanic_raw_data.zip`
     - if the file is not compressed, compress to `zip` file
 4. Move `pixelpanic_raw_data.zip` to `./raw_data/PXPN/` directory
