@@ -51,21 +51,25 @@ As well as code for the following 3 models
 
 ### Setup
 1. Install required packages
-`conda env create -f environment.yml`
-`conda activate your_env_name`
-1. Navigate to the shared dropbox `픽셀패닉 데이터_연세대 제공용`
-2. Download `픽셀패닉 Raw Data` folder
+# 1 create new environment
+conda create -n panic_environment python=3.10.18
+# 2 activate environment
+conda activate panic_environment
+# 3 install packages in requirements.txt
+pip install -r ./requirements.txt
+2. Navigate to the shared dropbox `픽셀패닉 데이터_연세대 제공용`
+3. Download `픽셀패닉 Raw Data` folder
     - rename to `pixelpanic_raw_data.zip`
     - if the file is not compressed, compress to `zip` file
-3. Move `pixelpanic_raw_data.zip` to `./raw_data/PXPN/` directory
+4. Move `pixelpanic_raw_data.zip` to `./raw_data/PXPN/` directory
     - Create `./raw_data/PXPN/` directory if it does not exist
-4. Download "픽셀패닉 enroll 정보"
+5. Download "픽셀패닉 enroll 정보"
     - `1. 픽셀패닉 enroll 정보_250516.xlsx` (20250711)
     - if using new enroll file, change `enroll_file_name` under in `PXPN/1-stage.ipynb`
-5. Move "픽셀패닉 enroll 정보" to `/data_scraping/raw_data/PXPN/`
-4. Download `SYM.zip`
-5. Extract `SYM.zip`
-6. Move the SYM excel files to `/data_scraping/raw_data/SYM`
+6. Move "픽셀패닉 enroll 정보" to `/data_scraping/raw_data/PXPN/`
+7. Download `SYM.zip`
+8. Extract `SYM.zip`
+9. Move the SYM excel files to `/data_scraping/raw_data/SYM`
     - `backup_SYM2.xlsx`
     - `backup_SYM1.xlsx`
 
