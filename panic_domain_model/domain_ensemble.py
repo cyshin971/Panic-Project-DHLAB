@@ -46,7 +46,7 @@ def main():
     data_root  = Path(cfg.get('DATA_DIR', 'default data directory'))
     result_root= Path(cfg.get('RESULT_DIR','default result directory'))
 
-    data_dir   = data_root / hr_filter
+    data_dir   = data_root
     save_dir = result_root / f"{hr_filter}_{scenario}"
     save_dir.mkdir(parents=True, exist_ok=True)
     model_dir  = result_root / f"{hr_filter}_{scenario}" / 'model'

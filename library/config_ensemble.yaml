@@ -1,5 +1,5 @@
-DATA_DIR: ""                                        # Directory path to load data files
-RESULT_DIR: ""                                      # Directory path to save results
+DATA_DIR: "./_tmp/DOMAIN"                           # Directory path to load data files
+RESULT_DIR: "./results"                             # Directory path to save results
 HR_FILTER: "720"                                    # Heartrate points (360/720)
 SCENARIO: "A+B"                                     # Scenario: A+B / A / B
 
