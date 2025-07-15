@@ -52,18 +52,25 @@ conda activate panic_proc
 cd <Panic-Project-DHLAB root directory>
 pip install -r ./panic_proc_env.txt
 ```
-1. Navigate to the shared dropbox `픽셀패닉 데이터_연세대 제공용`
-2. Download `픽셀패닉 Raw Data` folder
+2. Create virtual environment for data processing (`panic_model`):  
+```
+conda create --name panic_model python=3.10
+conda activate panic_model
+cd <Panic-Project-DHLAB root directory>
+pip install -r ./panic_model_env.txt
+```
+3. Navigate to the shared dropbox `픽셀패닉 데이터_연세대 제공용`
+4. Download `픽셀패닉 Raw Data` folder
     - rename to `pixelpanic_raw_data.zip`
     - if the file is not compressed, compress to `zip` file
-3. Move `pixelpanic_raw_data.zip` to `./raw_data/PXPN/` directory
+5. Move `pixelpanic_raw_data.zip` to `./raw_data/PXPN/` directory
     - Create `./raw_data/PXPN/` directory if it does not exist
-4. Download "픽셀패닉 enroll 정보"
+6. Download "픽셀패닉 enroll 정보"
     - `1. 픽셀패닉 enroll 정보_250516.xlsx` (20250711)
     - change file name to `pxpn_enroll_info.xlsx`  
     - Move `pxpn_enroll_info.xlsx` to `/data_scraping/raw_data/PXPN/`
-5. Download and extract `SYM.zip`
-6. Move the SYM excel files to `/data_scraping/raw_data/SYM`
+7. Download and extract `SYM.zip`
+8. Move the SYM excel files to `/data_scraping/raw_data/SYM`
     - `backup_SYM2.xlsx`
     - `backup_SYM1.xlsx`
 
@@ -83,12 +90,12 @@ pip install -r ./panic_proc_env.txt
 
 ### Data Preprocessing
 > Note: Run the notebooks below using the data processing virtual environment -> `panic_proc`
-2. Open `./data_preprocessing/data_preprocessing.ipynb`
-3. Under ⚙️|Settings, change `scraped_data_filename` to selected `scraped_data`
-4. Run All `./data_preprocessing/data_preprocessing.ipynb`
-5. Run All `./data_preprocessing/data_imputation.ipynb`
-6. Run All `./data_preprocessing/data_analysis.ipynb`
-7. Run `full_dataset.py`
+1. Open `./data_preprocessing/data_preprocessing.ipynb`
+2. Under ⚙️|Settings, change `scraped_data_filename` to selected `scraped_data`
+3. Run All `./data_preprocessing/data_preprocessing.ipynb`
+4. Run All `./data_preprocessing/data_imputation.ipynb`
+5. Run All `./data_preprocessing/data_analysis.ipynb`
+6. Run `full_dataset.py`
 > Install required packages specified in each `ipynb`
 
 ---
@@ -116,8 +123,8 @@ To create an ensemble model using all the best domain models:
     --config ./library/config_ensemble.yaml
     ```
 ### Panic severity prediction model 
-1. Under ⚙️|Settings, change `scraped_data_filename` to selected `scraped_data`
-2. Under ⚙️|Settings, set `dbp` param to desired days before panic for data processing and dataset construction
-3. Run All `severity_multiclass_pycare.ipynb`
+> Note: Run the notebooks below using the modeling virtual environment -> `panic_model`
+1. Under ⚙️|Settings, set `dbp` param to desired days before panic for data processing and dataset construction
+2. Run All `severity_multiclass_pycare.ipynb`
 
 > Install required packages specified in each `ipynb`
