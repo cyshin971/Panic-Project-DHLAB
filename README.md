@@ -39,43 +39,39 @@ As well as code for the following 3 models
 ---
 ## Required Packages
 `Python Version = 3.10`
-- `ipykernel`
-- `pandas`
-- `openpyxl`
-- `xlrd`
-- `mne`
-- `CosinorPy`
-- `seaborn`
+- `panic_proc` : virtual anaconda environment for data processing
+- `panic_model` : virtual anaconda environment for data modeling
 
 ## Instructions
 
 ### Setup
-1. Install required packages:  
-- `cd <Panic-Project-DHLAB root directory>`
-- `conda env create -f dhlab_panic_env.yml`
-- `conda activate dhlab_panic_env`
+1. Create virtual environment for data processing (`panic_proc`):  
+```
+conda create --name panic_proc python=3.10
+conda activate panic_proc
+cd <Panic-Project-DHLAB root directory>
+pip install -r ./panic_proc_env.txt
+```
 1. Navigate to the shared dropbox `픽셀패닉 데이터_연세대 제공용`
 2. Download `픽셀패닉 Raw Data` folder
     - rename to `pixelpanic_raw_data.zip`
     - if the file is not compressed, compress to `zip` file
-4. Move `pixelpanic_raw_data.zip` to `./raw_data/PXPN/` directory
+3. Move `pixelpanic_raw_data.zip` to `./raw_data/PXPN/` directory
     - Create `./raw_data/PXPN/` directory if it does not exist
-5. Download "픽셀패닉 enroll 정보"
+4. Download "픽셀패닉 enroll 정보"
     - `1. 픽셀패닉 enroll 정보_250516.xlsx` (20250711)
-    - if using new enroll file, change `enroll_file_name` under in `PXPN/1-stage.ipynb`
-6. Move "픽셀패닉 enroll 정보" to `/data_scraping/raw_data/PXPN/`
-7. Download `SYM.zip`
-8. Extract `SYM.zip`
-9. Move the SYM excel files to `/data_scraping/raw_data/SYM`
+    - change file name to `pxpn_enroll_info.xlsx`  
+    - Move `pxpn_enroll_info.xlsx` to `/data_scraping/raw_data/PXPN/`
+5. Download and extract `SYM.zip`
+6. Move the SYM excel files to `/data_scraping/raw_data/SYM`
     - `backup_SYM2.xlsx`
     - `backup_SYM1.xlsx`
 
 ### Data Scraping
+> Note: Run the notebooks below using the data processing virtual environment -> `panic_proc`
 1. Run PXPN data scraping notebooks
     1. `./data_scraping/PXPN/1_stage.ipynb`  
-        - Under ⚙️|Settings, update `enroll_file_name` to "픽셀패닉 enroll 정보" file name
     2. `./data_scraping/PXPN/2_stage.ipynb`  
-        - Under ⚙️|Settings, update `enroll_file_name` to "픽셀패닉 enroll 정보" file name
     3. `./data_scraping/PXPN/3_stage.ipynb`  
 2. Run SYM data scraping notebooks
     1. `./data_scraping/SYM/1_stage_SYM.ipynb`  
@@ -86,6 +82,7 @@ As well as code for the following 3 models
 
 
 ### Data Preprocessing
+> Note: Run the notebooks below using the data processing virtual environment -> `panic_proc`
 2. Open `./data_preprocessing/data_preprocessing.ipynb`
 3. Under ⚙️|Settings, change `scraped_data_filename` to selected `scraped_data`
 4. Run All `./data_preprocessing/data_preprocessing.ipynb`
