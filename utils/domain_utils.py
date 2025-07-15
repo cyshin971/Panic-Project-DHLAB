@@ -142,10 +142,9 @@ def run_pycaret_experiment(
     model_dir: Path,
     figure_dir: Path,
     prob_models: list[str],
-    use_class_weight: bool = False,
-    weight_scheme: str = 'sqrt',
     seed: int = 42,
     bg_size: int = 1000,
+    use_sampler: bool = False,
     sampler_type: str = None,
     sampling_strategy: float = 0.5,
     k_neighbors: int = 5
@@ -190,7 +189,7 @@ def run_pycaret_experiment(
         X_res, y_res = sampler.fit_resample(X, y)
         train_val = pd.concat([X_res, y_res.rename('next_day_panic')], axis=1)
         sampled_counts = train_val['next_day_panic'].value_counts().to_dict()
-        sampler = None  # Defer to PyCaret's imbalance handling
+        # sampler = None  # Defer to PyCaret's imbalance handling
 
     print("> After sampling counts:", sampled_counts)
 
@@ -205,7 +204,7 @@ def run_pycaret_experiment(
         fold_strategy='stratifiedkfold',
         n_jobs=8,
         ignore_features=['ID', 'date'],
-        fix_imbalance=bool(sampler_type),
+        fix_imbalance=use_sampler,
         fix_imbalance_method=sampler
     )
     best = compare_models(include=prob_models, n_select=1, sort='AUC', fold=5)

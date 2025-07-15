@@ -11,6 +11,16 @@ def load_config(config_path: Path) -> dict:
     with open(config_path, 'r') as f:
         return yaml.safe_load(f)
 
+def load_and_clean(path: Path) -> pd.DataFrame:
+    df = (
+        pd.read_csv(path)
+          .drop(columns=['panic'], errors='ignore')
+    )
+    if 'next_day_panic' not in df:
+        raise KeyError(f"'next_day_panic' missing in {path.name}")
+    df['next_day_panic'] = df['next_day_panic'].astype(float)
+    return df
+
 def merge_data(panic_path: Path, demo_path: Path):
     df_panic = pd.read_csv(panic_path)
     df_demo = pd.read_csv(demo_path)
@@ -50,7 +60,7 @@ def data_preprocessing(group_col, date_col,
     df_full = reorder(df_full)
     # Fill missing values
     df_full = group_impute(
-        df, group_col, date_col, 
+        df_full, group_col, date_col, 
         zero_fill_cols=daily_cols, 
         ffill_bfill_cols=survey_cols
     )

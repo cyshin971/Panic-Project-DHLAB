@@ -39,12 +39,13 @@ def main():
     scenario       = args.scenario   or cfg['SCENARIO']
 
     # 3) Set up directories
-    data_dir     = Path(cfg['DATA_DIR']) / str(cfg["HR_FILTER"])
+    data_dir     = Path(cfg['DATA_DIR'])
+    temp_dir     = Path(cfg['TEMP_DIR']) / "DOMAIN"
     save_dir     = Path(cfg['SAVE_DIR']) / f"{cfg['HR_FILTER']}_{scenario}"
     save_data_dir= data_dir / f"{cfg['HR_FILTER']}_{scenario}"
     model_dir    = save_dir / "model"
     fig_dir      = save_dir / "figure"
-    for d in (save_dir, save_data_dir, model_dir, fig_dir):
+    for d in (temp_dir, save_dir, save_data_dir, model_dir, fig_dir):
         d.mkdir(parents=True, exist_ok=True)
 
     # Read column lists for each category
@@ -73,9 +74,9 @@ def main():
     df_panic     = df_full[df_full['panic_label'] == 1]
 
     # Save full, non-panic, and panic datasets
-    df_full.to_csv(data_dir / "full_panic.csv",     index=False)
-    df_non_panic.to_csv(data_dir / "non_panic_days.csv", index=False)
-    df_panic.to_csv(data_dir / "panic_days.csv",    index=False)
+    df_full.to_csv(temp_dir / "full_panic.csv",     index=False)
+    df_non_panic.to_csv(temp_dir / "non_panic_days.csv", index=False)
+    df_panic.to_csv(temp_dir / "panic_days.csv",    index=False)
 
     # Filter rows with missing values by column category (using filter_missing_rows)
     if cfg["FULL_DATASET"]:
@@ -113,12 +114,11 @@ def main():
                 model_dir=model_dir,
                 figure_dir=fig_dir,
                 prob_models=PROB_MODELS,
-                use_class_weight=cfg["USE_CLASS_WEIGHT"],
-                weight_scheme=cfg["WEIGHT_SCHEME"],
                 seed=SEED,
                 bg_size=SHAP_BG_SIZE,
+                use_sampler=cfg['USE_SAMPLER'],
                 sampler_type=sampler_type,
-                sampling_strategy=cfg["SAMPLING_STRATEGY"],
+                sampling_strategy=bool(cfg["SAMPLING_STRATEGY"]),
                 k_neighbors=cfg["K_NEIGHBORS"]
             )
             summary.append(res)

@@ -3,57 +3,66 @@ import zipfile
 import pandas as pd
 import numpy as np
 
-import os
+
+
 import zipfile
 import pandas as pd
+from io import BytesIO
 
 def read_all_data(title, outer_zip_path, exclude_keywords=None):
-    """
-    title: string to match in CSV filenames (e.g., 'HeartRate')
-    outer_zip_path: path to the outer ZIP file that contains subfolders and inner ZIPs
-    exclude_keywords: list of substrings; if any are present in a CSV filename, that file will be skipped.
-    """
-    # List of IDs to process
-    id_list = [
-        "PXPN_10006", "PXPN_10007", "PXPN_10008", "PXPN_10009", "PXPN_10010",
-        "PXPN_10011", "PXPN_10012", "PXPN_10013", "PXPN_10014", "PXPN_10015",
-        "PXPN_10018", "PXPN_10019", "PXPN_10020", "PXPN_10021", "PXPN_10022",
-        "PXPN_10023", "PXPN_10024", "PXPN_10025", "PXPN_10028", "PXPN_10029",
-        "PXPN_10030", "PXPN_10032", "PXPN_10034", "PXPN_10035", "PXPN_10036",
-        "PXPN_10037", "PXPN_10038", "PXPN_10039", "PXPN_10040"
-    ]
-
     all_data_list = []
+
     try:
         with zipfile.ZipFile(outer_zip_path, 'r') as outer_zf:
-            # Iterate over each ID in the predefined list
-            for id_dir in id_list:
-                # Define folder prefix for this ID inside the outer ZIP
-                folder_prefix = f"PassiveData/{id_dir}_PassiveData"
-                # Iterate through all members and find inner ZIPs for this ID
-                for member in outer_zf.namelist():
-                    if member.startswith(folder_prefix) and member.lower().endswith('.zip'):
-                        # Read inner ZIP bytes
-                        with outer_zf.open(member) as inner_stream:
-                            from io import BytesIO
-                            inner_buf = BytesIO(inner_stream.read())
-                            try:
-                                with zipfile.ZipFile(inner_buf, 'r') as inner_zf:
-                                    for inner_member in inner_zf.namelist():
-                                        if title in inner_member and inner_member.lower().endswith('.csv') and (
-                                            exclude_keywords is None or not any(
-                                                kw.lower() in inner_member.lower() for kw in exclude_keywords
-                                            )
-                                        ):
-                                            with inner_zf.open(inner_member) as csvfile:
-                                                try:
-                                                    df_temp = pd.read_csv(csvfile, index_col=False)
-                                                    df_temp['ID'] = id_dir
-                                                    all_data_list.append(df_temp)
-                                                except Exception:
-                                                    continue
-                            except zipfile.BadZipFile:
-                                continue
+            PREFIX = "pixelpanic_raw_data/PassiveData/"
+            # (id_dir, zip_path) 튜플을 모을 리스트
+            entries = []
+
+            # 1) 모든 PassiveData ZIP 파일 경로 수집
+            for f in outer_zf.namelist():
+                if not f.startswith(PREFIX):
+                    continue
+
+                raw = f.split("/")[-1]
+                if (
+                    raw.endswith(".zip")
+                    and "_PassiveData" in raw
+                    and "__MACOSX" not in f
+                    and "/._" not in f
+                    and ".DS_Store" not in f
+                    and not raw.startswith("._")
+                ):
+                    id_dir = raw.split("_PassiveData")[0]
+                    if id_dir.startswith("SRTN"):
+                        continue
+                    # 여기서 append → 같은 id_dir가 여러 번 append 됩니다
+                    entries.append((id_dir, f))
+
+            # 2) 수집된 모든 ZIP을 순회하며 CSV 읽기
+            for id_dir, zip_path in entries:
+                with outer_zf.open(zip_path) as inner_stream:
+                    inner_buf = BytesIO(inner_stream.read())
+                    try:
+                        with zipfile.ZipFile(inner_buf, 'r') as inner_zf:
+                            for inner_member in inner_zf.namelist():
+                                name_lower = inner_member.lower()
+                                if (
+                                    title in inner_member
+                                    and name_lower.endswith('.csv')
+                                    and (exclude_keywords is None
+                                         or not any(kw.lower() in name_lower
+                                                    for kw in exclude_keywords))
+                                ):
+                                    with inner_zf.open(inner_member) as csvfile:
+                                        try:
+                                            df_temp = pd.read_csv(csvfile, index_col=False)
+                                            df_temp['ID'] = id_dir
+                                            all_data_list.append(df_temp)
+                                        except Exception:
+                                            continue
+                    except zipfile.BadZipFile:
+                        continue
+
     except FileNotFoundError:
         print(f"Outer ZIP not found: {outer_zip_path}")
         return pd.DataFrame()

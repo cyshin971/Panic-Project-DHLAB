@@ -106,21 +106,23 @@ pip install -r ./panic_model_env.txt
     run `/model/unseen_test_set.py`
     and run `./model/Gradient_boosting_classifier.py`
 ### Next day panic prediction model 2
+> Note: Run the codes below using the modeling virtual environment -> `panic_model`
+
 To select the best model for each domain:
 1. ⚙️|Settings, set the parameters in `./library/config_domain.yaml`
 2. Run the domain_main script, passing in the config file:
     ```bash
     PYTHONPATH=./Panic-Project-DHLAB \
-    python ./panic_domain_model/domain_main.py \
-    --config ./library/config_domain.yaml
+    python ./Panic-Project-DHLAB/panic_domain_model/domain_main.py \
+    --config ./Panic-Project-DHLAB/library/config_domain.yaml
     ```
 To create an ensemble model using all the best domain models:
 1. ⚙️|Settings, set the parameters in `./library/config_ensemble.yaml`
 2. Run the domain_ensemble script, passing in the config file:
     ```bash
     PYTHONPATH=./Panic-Project-DHLAB \
-    python ./panic_domain_model/domain_ensemble.py \
-    --config ./library/config_ensemble.yaml
+    python ./Panic-Project-DHLAB/panic_domain_model/domain_ensemble.py \
+    --config ./Panic-Project-DHLAB/library/config_ensemble.yaml
     ```
 ### Panic severity prediction model 
 > Note: Run the notebooks below using the modeling virtual environment -> `panic_model`

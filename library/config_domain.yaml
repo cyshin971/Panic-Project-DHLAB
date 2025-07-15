@@ -1,5 +1,6 @@
-DATA_DIR: ""                                              # Directory path to load data files
-SAVE_DIR: ""                                              # Directory path to save results
+DATA_DIR: "./data"                    # Directory path to load data files
+TEMP_DIR: "./_tmp"                    # Directory path to save temp files
+SAVE_DIR: "./results"                 # Directory path to save results
 PANIC_FILE: "panic_pre_data.csv"                          # Panic filename
 DEMO_FILE:  "panic_demography_data.csv"                   # Demograpy filename
 HR_FILTER: 720                                            # Heartrate points (360/720)
