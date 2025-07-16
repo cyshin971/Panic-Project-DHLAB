@@ -90,10 +90,14 @@ pip install -r ./panic_model_env.txt
 
 ### Data Preprocessing
 > **Note**: Run the notebooks below using the data processing virtual environment -> `panic_proc`
-1. Run All `./data_preprocessing/data_preprocessing.ipynb`
-2. Run All `./data_preprocessing/data_imputation.ipynb`
-3. Run All `./data_preprocessing/data_analysis.ipynb`
-4. Run `full_dataset.py`
+1. Open `./data_preprocessing/data_preprocessing.ipynb`
+2. Under ⚙️|Settings, change `scraped_data_filename` to selected `scraped_data`
+3. Run All `./data_preprocessing/data_preprocessing.ipynb`
+4. Run All `./data_preprocessing/data_imputation.ipynb`
+5. Run All `./data_preprocessing/data_analysis.ipynb`
+> Install required packages specified in each `ipynb`
+
+
 
 ### Next day panic prediction model 1
 1. Run `./model/full_dataset.py`

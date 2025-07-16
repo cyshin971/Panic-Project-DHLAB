@@ -31,7 +31,6 @@ mapping = df_full.set_index('entry_id')['panic_label'].to_dict()
 
 df_full['next_day_panic'] = df_full['target_entry_id'].map(mapping).eq(1).astype(int)
 df_full = df_full.drop(columns=['entry_id', 'dataset', 'panic', 'target_entry_id'])
-df_full = df_full.drop(['panic_label', 'ID', 'date', 'severity'], axis=1)
 
 result_path = os.path.join(RAW_dir, "df_720.csv")
 df_full.to_csv(result_path, index=False)

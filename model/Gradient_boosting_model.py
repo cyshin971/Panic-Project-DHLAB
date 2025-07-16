@@ -30,7 +30,7 @@ model_dir = get_file_path(model_base_dir, model_name)
 # 1. 데이터 로드 및 전처리
 df = pd.read_csv(df_dir)
 feature_names = df.drop(['panic_label','ID','date','severity','next_day_panic'], axis=1).columns
-df = df.drop(['Unnamed: 0', 'panic_label', 'ID', 'date', 'severity'], axis=1)
+df = df.drop(['panic_label', 'ID', 'date', 'severity'], axis=1)
 
 X = df.drop(columns=['next_day_panic'])
 y = df['next_day_panic'].values
