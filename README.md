@@ -98,13 +98,11 @@ pip install -r ./panic_model_env.txt
 6. Run `full_dataset.py`
 > Install required packages specified in each `ipynb`
 
----
+
 
 ### Next day panic prediction model 1
-1. Run `./model/Gradient_boosting_classifier.py` with your dataset.
-2. If you want to test with an existing datset,
-    run `/model/unseen_test_set.py`
-    and run `./model/Gradient_boosting_classifier.py`
+1. Run `./model/full_dataset.py`
+2. Run `./model/Gradient_boosting_model.py`
 ### Next day panic prediction model 2
 > **Note**: Run the codes below using the modeling virtual environment -> `panic_model`
 
