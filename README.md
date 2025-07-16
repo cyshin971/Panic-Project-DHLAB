@@ -90,15 +90,10 @@ pip install -r ./panic_model_env.txt
 
 ### Data Preprocessing
 > **Note**: Run the notebooks below using the data processing virtual environment -> `panic_proc`
-1. Open `./data_preprocessing/data_preprocessing.ipynb`
-2. Under ⚙️|Settings, change `scraped_data_filename` to selected `scraped_data`
-3. Run All `./data_preprocessing/data_preprocessing.ipynb`
-4. Run All `./data_preprocessing/data_imputation.ipynb`
-5. Run All `./data_preprocessing/data_analysis.ipynb`
-6. Run `full_dataset.py`
-> Install required packages specified in each `ipynb`
-
-
+1. Run All `./data_preprocessing/data_preprocessing.ipynb`
+2. Run All `./data_preprocessing/data_imputation.ipynb`
+3. Run All `./data_preprocessing/data_analysis.ipynb`
+4. Run `full_dataset.py`
 
 ### Next day panic prediction model 1
 1. Run `./model/full_dataset.py`
@@ -127,5 +122,3 @@ To create an ensemble model using all the best domain models:
 > **Note**: Run the notebooks below using the modeling virtual environment -> `panic_model`
 1. Under ⚙️|Settings, set `dbp` param to desired days before panic for data processing and dataset construction
 2. Run All `severity_multiclass_pycare.ipynb`
-
-> Install required packages specified in each `ipynb`
