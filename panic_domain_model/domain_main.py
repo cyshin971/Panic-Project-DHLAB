@@ -42,7 +42,7 @@ def main():
     data_dir     = Path(cfg['DATA_DIR'])
     temp_dir     = Path(cfg['TEMP_DIR']) / "DOMAIN"
     save_dir     = Path(cfg['SAVE_DIR']) / f"{cfg['HR_FILTER']}_{scenario}"
-    save_data_dir= data_dir / f"{cfg['HR_FILTER']}_{scenario}"
+    save_data_dir= data_dir / 'domain' / f"{cfg['HR_FILTER']}_{scenario}"
     model_dir    = save_dir / "model"
     fig_dir      = save_dir / "figure"
     for d in (temp_dir, save_dir, save_data_dir, model_dir, fig_dir):

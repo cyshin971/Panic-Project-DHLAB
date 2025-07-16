@@ -112,18 +112,19 @@ To select the best model for each domain:
 1. ⚙️|Settings, set the parameters in `./library/config_domain.yaml`
 2. Run the domain_main script, passing in the config file:
     ```bash
-    PYTHONPATH=./Panic-Project-DHLAB \
-    python ./Panic-Project-DHLAB/panic_domain_model/domain_main.py \
-    --config ./Panic-Project-DHLAB/library/config_domain.yaml
+    PYTHONPATH=$PROJECT_ROOT \
+    python -m panic_domain_model.domain_main \
+    --config $PROJECT_ROOT/library/config_domain.yaml
     ```
 To create an ensemble model using all the best domain models:
 1. ⚙️|Settings, set the parameters in `./library/config_ensemble.yaml`
 2. Run the domain_ensemble script, passing in the config file:
     ```bash
-    PYTHONPATH=./Panic-Project-DHLAB \
-    python ./Panic-Project-DHLAB/panic_domain_model/domain_ensemble.py \
-    --config ./Panic-Project-DHLAB/library/config_ensemble.yaml
+    PYTHONPATH=$PROJECT_ROOT \
+    python -m panic_domain_model.domain_ensemble \
+    --config $PROJECT_ROOT/library/config_ensemble.yaml
     ```
+    *`$PROJECT_ROOT=/path/to/your/Panic-Project-DHLAB`*
 ### Panic severity prediction model 
 > **Note**: Run the notebooks below using the modeling virtual environment -> `panic_model`
 1. Under ⚙️|Settings, set `dbp` param to desired days before panic for data processing and dataset construction

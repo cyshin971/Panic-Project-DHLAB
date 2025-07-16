@@ -13,6 +13,7 @@ from sklearn.metrics import (
     accuracy_score, recall_score, precision_score,
     f1_score, roc_auc_score, precision_recall_curve
 )
+from sklearn.cluster import KMeans
 
 from imblearn.over_sampling import (
     SMOTE, ADASYN, BorderlineSMOTE, KMeansSMOTE
