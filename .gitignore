@@ -4,14 +4,10 @@
 /_output
 /_archive
 /panic_severity_model/_results
-
-/data_scraping/PXPN_전처리/1_stage/preprocessed
-/data_scraping/SYM_전처리/data/processed
-/data_scraping/PXPN_전처리/1_stage/초기_파일_폴더/PXPN/PXPN_dropbox/pixelpanic_raw_data.zip
-/data_scraping/PXPN_전처리/1_stage/초기_파일_폴더/PXPN/
-/data_scraping/PXPN_전처리/1_stage/전처리 결과
+/panic_severity_model/catboost_info
 
 **/logs.log
 **/.venv
 **/.DS_Store
 **/__pycache__/
+.DS_Store

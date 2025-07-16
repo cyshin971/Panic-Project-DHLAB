@@ -20,3 +20,4 @@ notebook
 jupyterlab
 ipykernel
 xlrd==2.0.2
+tqdm_joblib==0.0.4
