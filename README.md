@@ -75,7 +75,7 @@ pip install -r ./panic_model_env.txt
     - `backup_SYM1.xlsx`
 
 ### Data Scraping
-> Note: Run the notebooks below using the data processing virtual environment -> `panic_proc`
+> **Note**: Run the notebooks below using the data processing virtual environment -> `panic_proc`
 1. Run PXPN data scraping notebooks
     1. `./data_scraping/PXPN/1_stage.ipynb`  
     2. `./data_scraping/PXPN/2_stage.ipynb`  
@@ -89,7 +89,7 @@ pip install -r ./panic_model_env.txt
 
 
 ### Data Preprocessing
-> Note: Run the notebooks below using the data processing virtual environment -> `panic_proc`
+> **Note**: Run the notebooks below using the data processing virtual environment -> `panic_proc`
 1. Open `./data_preprocessing/data_preprocessing.ipynb`
 2. Under ⚙️|Settings, change `scraped_data_filename` to selected `scraped_data`
 3. Run All `./data_preprocessing/data_preprocessing.ipynb`
@@ -106,7 +106,7 @@ pip install -r ./panic_model_env.txt
     run `/model/unseen_test_set.py`
     and run `./model/Gradient_boosting_classifier.py`
 ### Next day panic prediction model 2
-> Note: Run the codes below using the modeling virtual environment -> `panic_model`
+> **Note**: Run the codes below using the modeling virtual environment -> `panic_model`
 
 To select the best model for each domain:
 1. ⚙️|Settings, set the parameters in `./library/config_domain.yaml`
@@ -125,7 +125,7 @@ To create an ensemble model using all the best domain models:
     --config ./Panic-Project-DHLAB/library/config_ensemble.yaml
     ```
 ### Panic severity prediction model 
-> Note: Run the notebooks below using the modeling virtual environment -> `panic_model`
+> **Note**: Run the notebooks below using the modeling virtual environment -> `panic_model`
 1. Under ⚙️|Settings, set `dbp` param to desired days before panic for data processing and dataset construction
 2. Run All `severity_multiclass_pycare.ipynb`
 
