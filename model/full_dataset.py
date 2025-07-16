@@ -1,7 +1,6 @@
 import pandas as pd
 import datetime
 import config as cfg
-import pandas as pd
 from path_utils import get_file_path
 from pathlib import Path
 import os
@@ -31,7 +30,6 @@ df_full['target_entry_id'] = (
 mapping = df_full.set_index('entry_id')['panic_label'].to_dict()
 
 df_full['next_day_panic'] = df_full['target_entry_id'].map(mapping).eq(1).astype(int)
-print(df_full[['entry_id','target_entry_id','panic_label','next_day_panic']])
 df_full = df_full.drop(columns=['entry_id', 'dataset', 'panic', 'target_entry_id'])
 df_full = df_full.drop(['panic_label', 'ID', 'date', 'severity'], axis=1)
 
