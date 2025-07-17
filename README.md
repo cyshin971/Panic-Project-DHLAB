@@ -9,7 +9,7 @@ This project contains code to perform panic prediction from tabular data (socio-
 ---
 
 > **🔗 Availability Notice**  
-> This repository was made public on **July 17, 2025** and will be available to anyone with a link until **December 31, 2025**.  
+> This repository was made public on **July 17, 2025** and will be available to anyone with a link until **July 17, 2026**.  
 > After that date, its visibility may be changed at the owner’s discretion.
 
 ## Data Overview
